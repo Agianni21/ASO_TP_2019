@@ -1,4 +1,6 @@
 package fileanalyzer;
+import okhttp3.OkHttpClient;
+
 import java.io.File;
 
 /*
@@ -23,6 +25,9 @@ public class TerminalController {
         if ( ! fv.isValidFile() ) {
             System.out.println("File not valid (Not PE or doesn't exist)");
         }
+
+        OkHttpClient hp = new OkHttpClient();
+
 
     }
 
