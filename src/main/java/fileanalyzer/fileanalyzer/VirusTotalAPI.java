@@ -16,14 +16,20 @@ class VirusTotalAPI {
         setupApiKey();
     }
 
-    public Response startFileAnalysis(File file) throws IOException{
+    public Response scanFileRequest(File file) throws IOException{
         Request request = setupScanFileRequest(file);
         Response response = client.newCall(request).execute();
         return response;
     }
 
+    public Response fileReportRequest(String fileId) throws IOException {
+        Request request = setupFileReportRequest(fileId);
+        Response response = client.newCall(request).execute();
+        return response;
+    }
+
     private void setupApiKey() {
-        apiKey = "";
+        apiKey = "<PONER API ACA>";
     }
 
     private MediaType getFileMediatype(File file) {
@@ -51,6 +57,21 @@ class VirusTotalAPI {
         Request request = new Request.Builder()
                 .url("https://www.virustotal.com/vtapi/v2/file/scan")
                 .post(requestBody)
+                .build();
+        return request;
+    }
+
+    private Request setupFileReportRequest(String fileId) {
+        String url = new StringBuilder()
+                .append("https://www.virustotal.com/vtapi/v2/file/report")
+                .append("?apikey=")
+                .append(apiKey)
+                .append("&resource=")
+                .append(fileId)
+                .toString();
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
                 .build();
         return request;
     }

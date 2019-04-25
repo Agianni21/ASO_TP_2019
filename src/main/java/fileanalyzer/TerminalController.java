@@ -1,4 +1,6 @@
 package fileanalyzer;
+import fileanalyzer.fileanalyzer.FileAnalyzer;
+import fileanalyzer.fileanalyzer.FileReport;
 import okhttp3.OkHttpClient;
 
 import java.io.File;
@@ -25,10 +27,12 @@ public class TerminalController {
         if ( ! fv.isValidFile() ) {
             System.out.println("File not valid (Not PE or doesn't exist)");
         }
-
-        OkHttpClient hp = new OkHttpClient();
-
-
+        FileAnalyzer fileAnalyzer = new FileAnalyzer(file);
+        System.out.println();
+        System.out.println("Your file is being analyzed, wait a few moments");
+        FileReport fileReport = fileAnalyzer.analyze();
+        System.out.println("Your analysis was succesful: " + fileReport.wasAnalysisSuccesful());
+        System.out.println(fileReport.getRawJson());
     }
 
     public boolean isArgsValid() {
