@@ -21,7 +21,7 @@ public class FileAnalyzer {
 
     public FileReport analyze() {
         /*
-        Tenga miedo quien quiera arreglar esta monstruosidad
+        Toda esta funcion es horrible y deberia ser separada y acomodada en varias
          */
         FileReport report = new FileReport("", false);
         try {
