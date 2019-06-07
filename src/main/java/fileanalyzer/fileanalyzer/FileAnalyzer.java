@@ -20,9 +20,6 @@ public class FileAnalyzer {
     }
 
     public FileReport analyze() {
-        /*
-        Toda esta funcion es horrible y deberia ser separada y acomodada en varias
-         */
         FileReport report = new FileReport("", false);
         try {
             Response response = api.scanFileRequest(file);
@@ -48,7 +45,7 @@ public class FileAnalyzer {
                 }
                 Response reportResponse = api.fileReportRequest(fileId);
                 if (reportResponse.isSuccessful()) {
-                    String rawResponseBody = reportResponse.body().string(); // Codigo duplicado *cara de pikachu :o*
+                    String rawResponseBody = reportResponse.body().string();
                     System.out.println(rawResponseBody);
                     reportResponseJson = new JsonParser().parse(rawResponseBody).getAsJsonObject();
                 }
