@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import fileanalyzer.FileHash;
 import okhttp3.Response;
 
 import java.io.File;
@@ -20,7 +21,15 @@ public class FileAnalyzer {
     }
 
     public FileReport analyze() {
-        FileReport report = new FileReport("", false);
+        String fileHash = FileHash.createFileHash(file).getHashString();
+        FileReport report = new FileReport("", false, fileHash);
+
+        // If file was already analyzed, return its report
+        FileReports fileReports = new FileReports();
+        if (fileReports.fileReportExists(fileHash)) {
+            return fileReports.getFileReport(fileHash);
+        }
+        //
         try {
             Response response = api.scanFileRequest(file);
             String fileId = "";
@@ -62,6 +71,8 @@ public class FileAnalyzer {
             System.out.println("An error ocurred during HTTP request execution");
         }
 
+        // store file report
+        fileReports.addFileReport(report);
         return report;
     }
 
