@@ -28,10 +28,10 @@ public class FileReports {
     }
 
     public boolean fileReportExists(String fileHash) {
-        Document fileReport = collection.find(eq("hash", fileHash)).iterator().first();
+        Document fileReport = collection.find(eq("hash", fileHash)).first();
         if (fileReport != null) {
             lastFileHash = fileHash;
-            lastFileReport = new FileReport(fileReport.get("report"),true ,lastFileHash);
+            lastFileReport = new FileReport(fileReport.get("report").toString() ,true ,lastFileHash);
             return true;
         }
         return false;

@@ -29,7 +29,7 @@ class VirusTotalAPI {
     }
 
     private void setupApiKey() {
-        apiKey = "<PONER API ACA>";
+        apiKey = "4bf8c8a0eee13b7e640de3608ca190189de238e286d5b37a21fa1c70e4b2cdc0";
     }
 
     private MediaType getFileMediatype(File file) {

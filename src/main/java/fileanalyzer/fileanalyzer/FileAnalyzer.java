@@ -64,7 +64,7 @@ public class FileAnalyzer {
             }
            while (!isFileAnalysisFinished(reportResponseJson));
 
-            report = new FileReport(reportResponseJson.toString(), true);
+            report = new FileReport(reportResponseJson.toString(), true, fileHash);
 
 
         } catch (IOException e) {
